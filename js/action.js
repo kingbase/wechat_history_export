@@ -48,3 +48,4 @@ function scroll(min_delay, max_delay) {
 }
 
 // scroll(1, 3)
+console.log("Hello");

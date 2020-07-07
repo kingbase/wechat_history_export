@@ -44,9 +44,9 @@ function extract_item(card) {
     }
 }
 
-es = getElementsByXpath("//div[@class='weui_msg_card js_card']")
-for (var index in es) {
-    card = es[index]
-    var extracted_info = extract_item(card)
-}
+// es = getElementsByXpath("//div[@class='weui_msg_card js_card']")
+// for (var index in es) {
+//     card = es[index]
+//     var extracted_info = extract_item(card)
+// }
 
