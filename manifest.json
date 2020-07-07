@@ -4,16 +4,22 @@
     "version": "1.0",
     "description": "把某个公众号的历史文章全部导出为 Excel 表格或 PDF 文档。",
     "icons": {
-        "16": "images/Sticker_Icon_Rainbow.png",
-        "48": "images/Sticker_Icon_Rainbow.png",
-        "128": "images/Sticker_Icon_Rainbow.png"
+        "48": "images/icon-48.png",
+        "128": "images/icon-128.png"
     },
-    "browser_action": {
-        "default_icon": {
-            "19": "images/Sticker_Icon_Sun.png",
-            "38": "images/Sticker_Icon_Sun.png"
-        },
+    "permissions" : [
+        "declarativeContent",
+        "https://mp.weixin.qq.com/",
+        "activeTab",
+        "tabs"
+      ],    
+    "page_action": {
+        "default_icon": "images/icon-19.png",
         "default_title": "微信公众号文章导出",
         "default_popup": "popup.html"
+    },
+    "background": {
+        "scripts": ["js/background.js"],
+        "persistent": false
     }
 }
