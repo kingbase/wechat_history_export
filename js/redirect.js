@@ -1,5 +1,4 @@
 function getParsedQuery(url) {
-    console.log("URL: " + url)
     var query = {};
     var queryStrings = url.split("?", 2)
     if (queryStrings.length !== 2) {
@@ -8,8 +7,15 @@ function getParsedQuery(url) {
     var queryString = queryStrings[1];
     var pairs = (queryString[0] === '?' ? queryString.substr(1) : queryString).split('&');
     for (var i = 0; i < pairs.length; i++) {
-        var pair = pairs[i].split('=');
-        query[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1] || '');
+        var pair = pairs[i]
+        var firstEqualIndex = pair.indexOf("=")
+        if (firstEqualIndex == -1) {
+            query[decodeURIComponent(pair)] = "";
+        } else {
+            var left = pair.slice(0, firstEqualIndex)
+            var right = pair.slice(firstEqualIndex + 1)
+            query[decodeURIComponent(left)] = decodeURIComponent(right || '');    
+        }
     }
     return query;
 }
