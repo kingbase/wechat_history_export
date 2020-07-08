@@ -1,3 +1,7 @@
+function is_null(v) {
+    return v === null;
+}
+
 function is_defined(variable) {
     // 只是伪定义，因为函数的机制导致走不到这一步
     if (typeof variable !== 'undefined') {

@@ -1,2 +1,2 @@
-console = chrome.extension.getBackgroundPage().console;
-console.log("Hello");
+// console = chrome.extension.getBackgroundPage().console;
+// console.log("Hello");
