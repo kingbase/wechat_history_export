@@ -46,6 +46,11 @@ function cont_is_forbid() {
     }
 }
 
+function proceed() {
+    console.log("Start to proceed.");
+    chrome.tabs.executeScript(null, {file: "js/action.js"});
+}
+
 function detect_env(url) {
     console.log(url);
     if (is_article_url(url)) {
@@ -69,6 +74,7 @@ function detect_env(url) {
                 content_div.innerText += "失败了，重试一次，不好使就换浏览器。";
             } else if (result == CONT_SUCCESS) {
                 content_div.innerText += "成功了，看看咋样了。";
+                proceed()
             } else {
                 content_div.innerText += "对 JS 不熟: " + result;
             }

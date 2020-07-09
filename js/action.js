@@ -47,5 +47,14 @@ function scroll(min_delay, max_delay) {
     setTimeout(function(){scroll(min_delay, max_delay)}, rand * 1000);
 }
 
+// 之所以要强制刷新一遍，是为了清除错误状态
+// 例如，如果长时间未刷新当前页面，那么会出现各种意外的服务端返回错误，如：
+// - 系统繁忙(-3)，请稍后再试
+function refresh() {
+    window.location.reload(true);
+}
+
 // scroll(1, 3)
-console.log("Hello");
+console.log("Hello From Action");
+refresh();
+scroll();
