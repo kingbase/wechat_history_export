@@ -33,6 +33,9 @@ function scroll(min_delay, max_delay) {
     if (is_page_end()) {
         console.log("Done, will Do Last Scroll and Return.");
         scroll_to_buttom();
+        if (is_page_end()) {
+            disable_and_change("exportStartPauseButton", "Scroll End")
+        }    
         return;
     } else {
         scroll_to_buttom()
@@ -57,24 +60,36 @@ function init() {
             background-color: #4CAF50;
             border: none;
             color: white;
-            padding: 15px 32px;
+            padding: 10px 12px;
             text-align: center;
             text-decoration: none;
             display: inline-block;
-            font-size: 16px;
+            font-size: 14px;
             margin: 4px 2px;
             cursor: pointer;
+        }
+        .exportButton:disabled, .exportButton[disabled]{
+            border: 1px solid #999999;
+            background-color: #cccccc;
+            color: #666666;
         }
         </style>
         <div class="exportFixedPos" id="exportMainId">
             <div class="exportHeadClass" id="exportHeadId">
-                <button class="exportButton" onclick=start_or_pause()>Start / Pause</button>
-                <button class="exportButton" onclick=export_as_csv()>Export as CSV</button>
-                <button class="exportButton" onclick=export_as_pdf()>Export as PDF</button>
-                <button class="exportButton" onclick=test_inject()>Debug</button>
+                <button class="exportButton" id="exportStartPauseButton" onclick=start_or_pause()>Scroll Start / Pause</button>
+                <button class="exportButton" id="exportCsvButton" onclick=export_as_csv()>Export as CSV</button>
+                <button class="exportButton" id="enableClickButton" onclick=enable_click()>Enable OnPage Click</button>
             </div>
         </div>
     `);
+}
+
+function disable_and_change(button_id, new_text=null) {
+    var button_ele = document.getElementById(button_id)
+    button_ele.disabled = true;
+    if (new_text !== null) {
+        button_ele.innerText = new_text
+    }
 }
 
 var is_running = false;
@@ -84,8 +99,13 @@ function start_or_pause() {
     }        
     else {
         is_running = true;   
-        scroll(1, 2);
+        scroll(0.2, 0.5);
     }
+}
+
+function enable_click() {
+    enable_click_internal()
+    disable_and_change("enableClickButton")
 }
 
 function export_page(export_type) {
@@ -98,10 +118,18 @@ function export_page(export_type) {
 
 function export_as_csv() {
     export_page("csv")
+    make_csv()
 }
 
-function export_as_pdf() {
-    export_page("pdf")
+function is_profile_url(url) {
+    // https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzIxNjM3MDc4Mg==&scene=124&#wechat_redirect
+    profile_url_pattern = "https://mp.weixin.qq.com/mp/profile_ext?"
+    if (url.startsWith(profile_url_pattern)) {
+        return true;
+    }
+    return false;
 }
 
-init();
+if (is_profile_url(window.location.href)) {
+    init();
+}
