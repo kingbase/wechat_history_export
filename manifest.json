@@ -2,7 +2,7 @@
     "manifest_version": 2,
     "name": "WechatExporter",
     "version": "1.0",
-    "description": "把某个公众号的历史文章全部导出为 Excel 表格或 PDF 文档。",
+    "description": "让阅读公众号的历史文章不再反人类，可以在页面点击，也可以导出为表格(csv格式)。",
     "icons": {
         "48": "images/icon-48.png",
         "128": "images/icon-128.png"
@@ -10,8 +10,7 @@
     "permissions" : [
         "declarativeContent",
         "https://mp.weixin.qq.com/",
-        "activeTab",
-        "tabs"
+        "activeTab"
     ],
     "content_scripts": [
         {
@@ -19,7 +18,7 @@
           "js": ["js/content_script.js"]
         }
     ],
-    "web_accessible_resources": ["js/inject.js"],
+    "web_accessible_resources": ["js/inject.js", "js/extract.js"],
     "page_action": {
         "default_icon": "images/icon-19.png",
         "default_title": "微信公众号文章导出",
