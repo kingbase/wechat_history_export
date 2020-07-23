@@ -1,19 +1,18 @@
 chrome.runtime.onInstalled.addListener(function() {
-    // Replace all rules ...
-    chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
-      // With a new rule ...
-      chrome.declarativeContent.onPageChanged.addRules([
-        {
-          // That fires when a page's URL contains a 'g' ...
-          conditions: [
-            new chrome.declarativeContent.PageStateMatcher({
-                pageUrl: {hostEquals: 'mp.weixin.qq.com'},
-            })
-          ],
-          // And shows the extension's page action.
-          actions: [ new chrome.declarativeContent.ShowPageAction() ]
-        }
-      ]);
-    });
+  chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
+    chrome.declarativeContent.onPageChanged.addRules([
+      {
+        conditions: [
+          // [chrome.events - Google Chrome](https://developer.chrome.com/extensions/events)
+          new chrome.declarativeContent.PageStateMatcher({
+              pageUrl: {
+                hostEquals: 'mp.weixin.qq.com',
+                pathEquals: '/s'
+              },
+          })
+        ],
+        actions: [ new chrome.declarativeContent.ShowPageAction() ]
+      }
+    ]);
   });
-  
+});
