@@ -84,9 +84,9 @@ function detect_env(url) {
         }    
     } else if (is_profile_url(url)) {
         log("detect result: is profile url.");
-        content_div.innerHTML = "即将开始采集，请稍候......";
-        var resp = sendMessage("func:cont_is_forbid");
-        log("Resp: " + resp);
+        content_div.innerHTML = "请通过页面上的按钮控制采集。";
+        // var resp = sendMessage("func:cont_is_forbid");
+        // log("Resp: " + resp);
         // chrome.tabs.executeScript({
         //     code: '(' + cont_is_forbid + ')' + '();'
         // }, (result) => {

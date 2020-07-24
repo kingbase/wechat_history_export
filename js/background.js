@@ -7,7 +7,6 @@ chrome.runtime.onInstalled.addListener(function() {
           new chrome.declarativeContent.PageStateMatcher({
               pageUrl: {
                 hostEquals: 'mp.weixin.qq.com',
-                pathEquals: '/s'
               },
           })
         ],
