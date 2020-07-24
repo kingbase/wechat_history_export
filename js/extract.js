@@ -72,10 +72,14 @@ function get_history_info() {
         cards = es[index];
         msgid = cards.getAttribute("msgid");
         msg_date = cards.querySelector(".weui_msg_card_hd").innerText;
-        console.log("Extracting " + index.toString() + ": " + msgid + " - " + msg_date);
-        var extracted_info = extract_item(cards);
-        console.log(extracted_info[0]["count"]);
-        all_info.push(extracted_info);
+        // console.log("Extracting " + index.toString() + ": " + msgid + " - " + msg_date);
+        try {
+            var extracted_info = extract_item(cards);
+            // console.log(extracted_info[0]["count"]);
+            all_info.push(extracted_info);
+        } catch (error) {
+            console.error(error)
+        }
     }
     flat_info = all_info.flat();
     return flat_info;
