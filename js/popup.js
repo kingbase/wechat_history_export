@@ -1,6 +1,7 @@
 var content_div = document.getElementById('content_div');
 
 function get_cur_url(callback) {
+    log("get_cur_url");
     chrome.tabs.query(
         {
             'active': true, 
@@ -8,6 +9,7 @@ function get_cur_url(callback) {
         },
         function(tabs) {
             var url = tabs[0].url;
+            log(url);
             callback(url)
         }
     );    

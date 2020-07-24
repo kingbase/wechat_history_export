@@ -60,13 +60,13 @@ function get_profile_url(url) {
 function redirect_to_profile() {
     var url = window.location.href;
     if (url.includes("/profile_ext")) {
-        console.log("Is in profile so no redirect is needed.");
+        console_bp.log("Is in profile so no redirect is needed.");
     } else if (typeof biz !== "undefined" && is_opened_by_desktop() ) {
-        console.log("Good, opened by desktop app, will redirect to profile for biz " + biz + " now.");
+        console_bp.log("Good, opened by desktop app, will redirect to profile for biz " + biz + " now.");
         url = `https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=${biz}&scene=124&#wechat_redirect`;
         window.open(url);
     } else {
-        console.log("You should open from wechat desktop app.");
+        console_bp.log("You should open from wechat desktop app.");
     }
 }
 // redirect_to_profile();
