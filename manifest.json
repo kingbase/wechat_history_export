@@ -10,6 +10,7 @@
     "permissions" : [
         "declarativeContent",
         "https://mp.weixin.qq.com/",
+        "http://mp.weixin.qq.com/",
         "activeTab"
     ],
     "content_scripts": [
