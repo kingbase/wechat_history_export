@@ -1,4 +1,4 @@
-console.log("Hello From contentScript.js")
+console.log("Hello From contentScript.js");
 
 function inject_js(filename) {
     // [javascript - Insert code into the page context using a content script](https://stackoverflow.com/questions/9515704/)
@@ -11,5 +11,5 @@ function inject_js(filename) {
     (document.head || document.documentElement).appendChild(s);
 }
 
-inject_js('js/extract.js')
-inject_js('js/inject.js')
+inject_js('js/extract.js');
+inject_js('js/inject.js');

@@ -1,47 +1,47 @@
 function test_inject() {
-    alert("from test inject")
+    alert("from test inject");
 }
 
 function scroll_to_buttom() {
-    console.log("Scrolling to buttom")
+    console.log("Scrolling to buttom");
     window.scrollTo(0, document.body.scrollHeight);
 }
 
 function is_element_hiden(ele) {
     var style = window.getComputedStyle(ele);
-    return (style.display === 'none')
+    return (style.display === 'none');
 }
 
 function is_page_end() {
     e = document.getElementsByClassName("tips js_no_more_msg");
     if ((e.length == 1) && (!is_element_hiden(e[0]))) {
-        console.log("IsPageEnd? Yes.")
+        console.log("IsPageEnd? Yes.");
         return true;
     }        
     else {
         console.log("IsPageEnd? No.");
-        return false
+        return false;
     }
 }
 
 function scroll(min_delay, max_delay) {
-    console.log("Interval...")
+    console.log("Interval...");
     if (!is_running) {
-        console.log("Stop as user asked (pause).")
+        console.log("Stop as user asked (pause).");
         return;
     }
     if (is_page_end()) {
         console.log("Done, will Do Last Scroll and Return.");
         scroll_to_buttom();
         if (is_page_end()) {
-            disable_and_change("exportStartPauseButton", "Scroll End")
+            disable_and_change("exportStartPauseButton", "Scroll End");
         }    
         return;
     } else {
-        scroll_to_buttom()
+        scroll_to_buttom();
     }
     var rand = Math.random() * (max_delay - min_delay + 1) + min_delay;
-    console.log("Next time: " + rand + " Seconds.")
+    console.log("Next time: " + rand + " Seconds.");
     setTimeout(function(){scroll(min_delay, max_delay)}, rand * 1000);
 }
 
@@ -85,10 +85,10 @@ function init() {
 }
 
 function disable_and_change(button_id, new_text=null) {
-    var button_ele = document.getElementById(button_id)
+    var button_ele = document.getElementById(button_id);
     button_ele.disabled = true;
     if (new_text !== null) {
-        button_ele.innerText = new_text
+        button_ele.innerText = new_text;
     }
 }
 
@@ -104,21 +104,21 @@ function start_or_pause() {
 }
 
 function enable_click() {
-    enable_click_internal()
-    disable_and_change("enableClickButton")
+    enable_click_internal();
+    disable_and_change("enableClickButton");
 }
 
 function export_page(export_type) {
     console.log("export as " + export_type);
     if (!is_page_end()) {
-        var continue_export = confirm("还没有拉到最底部，导出的数据可能不全，是否现在导出？")
+        var continue_export = confirm("还没有拉到最底部，导出的数据可能不全，是否现在导出？");
         if (!continue_export)  return;
     }
 }
 
 function export_as_csv() {
-    export_page("csv")
-    make_csv()
+    export_page("csv");
+    make_csv();
 }
 
 function is_profile_url(url) {
