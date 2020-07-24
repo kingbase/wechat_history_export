@@ -25,6 +25,12 @@ function extract_item(card) {
             var img_article_url = elements[0].getAttribute("hrefs");
             return [{"date": pub_date, "card_type":card_type, "text":img_article_url, "count":1, "id":1}];
         }
+        var elements = card.getElementsByClassName("weui_media_box appmsg js_video video_msg");
+        if (elements.length != 0) {
+            var card_type = "视频分享页";
+            var video_article_url = elements[0].getAttribute("hrefs");
+            return [{"date": pub_date, "card_type":card_type, "text":video_article_url, "count":1, "id":1}];
+        }
         var elements = card.getElementsByClassName("weui_media_box img js_appmsg");
         if (elements.length != 0) {
             // image
@@ -57,11 +63,16 @@ function extract_item(card) {
                 infos.push(article_info);
             }
             // console.log(`${pub_date}: [${title}] - ${href}`);
+            if (infos.length === 0) {
+                return null;
+            }
             return infos;
         }
         console.log(`${pub_date}: Error Not Found - ${card}`);
+        return null;
     } else {
         console.log(`${pub_date}: Error Unknown - ${card}`);
+        return null;
     }
 }
 
@@ -75,8 +86,10 @@ function get_history_info() {
         // console.log("Extracting " + index.toString() + ": " + msgid + " - " + msg_date);
         try {
             var extracted_info = extract_item(cards);
-            // console.log(extracted_info[0]["count"]);
-            all_info.push(extracted_info);
+            if (extracted_info !== null) {
+                // console.log(extracted_info[0]["count"]);
+                all_info.push(extracted_info);
+            }
         } catch (error) {
             console.error(error)
         }
